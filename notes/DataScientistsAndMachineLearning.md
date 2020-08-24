@@ -136,7 +136,7 @@ The features you use influence more than everything else the result. No algorith
 
 According to a survey in Forbes, data scientists spend **80%** of their time on **data preparation:**
 
-![DataScientistTimeShare](/images/DataScientistTimeShare.jpg)
+![DataScientistTimeShare](../images/DataScientistTimeShare.jpg)
 
 List of Techniques:
 

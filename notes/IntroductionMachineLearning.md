@@ -75,7 +75,7 @@ The main difference:
 
 TLDR:
 
-![Supervised vs. Unsupervised Matrix](/images/SupervisedUnsupervisedLearning_TLDR_TowardsDataScience.jpg)
+![Supervised vs. Unsupervised Matrix](../images/SupervisedUnsupervisedLearning_TLDR_TowardsDataScience.jpg)
 
 ## Batch vs. Online Learning ##
 
@@ -197,12 +197,12 @@ Online Learning AKA incremental or out-of-core learning.
 	  - It produces a two dimensional representation of the input space of the set of training samples.
 	    - For example, let’s look at the handwritten digits dataset. The inputs for SOM are high dimensional since each input dimension represents the grayscale value of one pixel on a 28 by 28 image, which makes the inputs 784-dimensional (each dimension is a value between 0 and 255). If we’ll map them to a 20x20 SOM and color them based on their true class (a number from 0 to 9) we’ll get the following:
 
-		  ![InstanceBasedAlgorithms SOM TowardsDataScience](/images/InstanceBasedAlgorithms_SOM_TowardsDataScience.png)
+		  ![InstanceBasedAlgorithms SOM TowardsDataScience](../images/InstanceBasedAlgorithms_SOM_TowardsDataScience.png)
 
 	- Another example of SOM is NLP.
 	  - We can use it for a classification of let’s say 2 million medical papers. SOM will create a cluster of similar meaning words:
 
-	    ![InstanceBasedAlgorithms NLP TowardsDataScience](/images/InstanceBasedAlgorithms_NLP_TowardsDataScience.png)
+	    ![InstanceBasedAlgorithms NLP TowardsDataScience](../images/InstanceBasedAlgorithms_NLP_TowardsDataScience.png)
 
 	- Some things to consider:
 	  - SOM outputs a 2D map for any number of indicators.

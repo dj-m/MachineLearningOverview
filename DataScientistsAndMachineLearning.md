@@ -124,3 +124,32 @@ Disadvantages
   - Risk of introducing biases.
   - Issues with understanding real-world data problems.
   
+## Best Practices for Feature Engineering ##
+
+Feature engineering efforts mainly have two goals:
+
+  - Preparing the proper input dataset, compatible with the machine learning algorithm requirements.
+  - Improving the performance of machine learning models.
+  
+The features you use influence more than everything else the result. No algorithm alone, to my knowledge, can supplement the information gain given by correct **feature engineering.**
+— Luca Massaron
+
+According to a survey in Forbes, data scientists spend **80%** of their time on **data preparation:**
+
+![DataScientistTimeShare](DataScientistTimeShare.jpg)
+
+List of Techniques:
+
+1. Imputation
+  - Imputation is a more preferable option rather than dropping because it preserves the data size. 
+  - Except for the case of having a default value for missing values, I think the best imputation way is to use the medians of the columns. As the averages of the columns are sensitive to the outlier values, while medians are more solid in this respect.
+  - Replacing the missing values with the maximum occurred value in a column is a good option for handling categorical columns.
+2. Handling Outliers
+  - 
+3. Binning
+4. Log Transform
+5. One-Hot Encoding 
+6. Grouping Operations 
+7. Feature Split 
+8. Scaling
+9. Extracting Date

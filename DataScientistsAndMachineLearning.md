@@ -145,11 +145,44 @@ List of Techniques:
   - Except for the case of having a default value for missing values, I think the best imputation way is to use the medians of the columns. As the averages of the columns are sensitive to the outlier values, while medians are more solid in this respect.
   - Replacing the missing values with the maximum occurred value in a column is a good option for handling categorical columns.
 2. Handling Outliers
-  - 
+  - Outlier Detection with Standard Deviation
+    - If a value has a distance to the average higher than x * standard deviation, it can be assumed as an outlier. 
+	  - Then what x should be? Usually, a value between 2 and 4 seems practical.
+  - Outlier Detection with Percentiles
+    - If your data ranges from 0 to 100, your top 5% is not the values between 96 and 100. Top 5% means here the values that are out of the 95th percentile of data.
 3. Binning
+  - The main motivation of binning is to make the model more robust and prevent overJtting, however, it has a cost to the performance.
+  - For numerical columns, except for some obvious over=tting cases, binning might be redundant for some kind of algorithms, due to its eAect on model performance.
 4. Log Transform
-5. One-Hot Encoding 
+  - Logarithm transformation (or log transform) is one of the most commonly used mathematical transformations in feature engineering.
+  - Benefits:
+    - It helps to handle skewed data and after transformation, the distribution becomes more approximate to normal.
+	- In most of the cases the magnitude order of the data changes within the range of the data. This type of data comes from a multiplicative process and log transform normalizes the magnitude diAerences like that.
+	- It also decreases the eAect of the outliers, due to the normalization of magnitude diAerences and the model become more robust.
+5. One-Hot Encoding
+  - One-hot encoding is one of the most common encoding methods in machine learning.
+  - This method spreads the values in a column to multiple [ag columns and assigns 0 or 1 to them. These binary values express the relationship between grouped and encoded column.
+  - This method changes your categorical data, which is challenging to understand for algorithms, to a numerical format and enables you to group your categorical data without losing any information.
 6. Grouping Operations 
+  - The key point of group by operations is to decide the aggregation functions of the features.
+  - For numerical features, average and sum functions are usually convenient options, whereas for categorical features it more complicated.
+  - Categorical Columns:
+    - The first option is to select the label with the highest frequency. In other words, this is the max operation for categorical columns, but ordinary max functions generally do not return this value, you need to use a lambda function for this purpose.
+	- Second option is to make a pivot table. This approach resembles the encoding method in the preceding step with a diAerence. Instead of binary notation, it can be de=ned as aggregated functions for the values between grouped and encoded columns.
+	- Last categorical grouping option is to apply a group by function after applying one-hot encoding. This method preserves all the data -in the =rst option you lose some-, and in addition, you transform the encoded column from categorical to numerical in the meantime. You can check the next section for the explanation of numerical column grouping.
 7. Feature Split 
+  - Most of the time the dataset contains string columns that violates tidy data principles. By extracting the utilizable parts of a column into new features.
+  - Split function is a good option, however, there is no one way of splitting features. It depends on the characteristics of the column, how to split it.
 8. Scaling
+  - The continuous features become identical in terms of the range, after a scaling process.
+  - Two common ways of scaling:
+    - Normalization (or min-max normalization) scale all values in a =xed range between 0 and 1.
+	- Standardization (or z-score normalization) scales the values while taking into account standard deviation.
 9. Extracting Date
+  - Building an ordinal relationship between the values is very challenging for a machine learning algorithm if you leave the date columns without manipulation.
+  - Three types of preprocessing for dates:
+    - Extracting the parts of the date into diAerent columns: Year, month, day, etc.
+	- Extracting the time period between the current date and columns in terms of years, months, days, etc.
+	- Extracting some speci=c features from the date: Name of the weekday, Weekend or not, holiday or not, etc.
+
+These techniques are not magical tools. If your data tiny, dirty and useless, feature engineering may remain incapable. Do not forget “garbage in, garbage out!”

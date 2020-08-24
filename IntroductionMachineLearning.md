@@ -104,8 +104,8 @@ Online Learning
 Online Learning AKA incremental or out-of-core learning.
 
 - Python Libraries
-  - Vowpal Wabbit https://github.com/VowpalWabbit/vowpal_wabbit
-  - creme (scikit-inspired) https://creme-ml.github.io/
+  - [Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit)
+  - [creme](https://creme-ml.github.io/) (scikit-inspired)
 
 - In a general sense, you need two things for machine learning: data and a suitable learning algorithm.
   - The learning algorithm learns from/trains on your data and produces a (hopefully) accurate model, typically used for prediction on new data.
@@ -202,7 +202,7 @@ Online Learning AKA incremental or out-of-core learning.
 	- Another example of SOM is NLP.
 	  - We can use it for a classification of let’s say 2 million medical papers. SOM will create a cluster of similar meaning words:
 
-	    ![InstanceBasedAlgorithms NLP TowardsDataScience](/InstanceBasedAlgorithms_NLP_TowardsDataScience.png)
+	    ![InstanceBasedAlgorithms NLP TowardsDataScience](InstanceBasedAlgorithms_NLP_TowardsDataScience.png)
 
 	- Some things to consider:
 	  - SOM outputs a 2D map for any number of indicators.

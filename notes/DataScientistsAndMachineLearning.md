@@ -186,3 +186,95 @@ List of Techniques:
 	- Extracting some speci=c features from the date: Name of the weekday, Weekend or not, holiday or not, etc.
 
 These techniques are not magical tools. If your data tiny, dirty and useless, feature engineering may remain incapable. Do not forget “garbage in, garbage out!”
+
+## Overfitting vs. Underfitting: A Complete Example ##
+
+When you study data science you come to realize there are no truly complex ideas, just many simple building blocks combined together.
+
+Rather than trying to learn everything at once when you want to develop a model, it’s more productive and less frustrating to work through one block at a time. This ensures you have a solid idea of the fundamentals and avoid many common mistakes that will hold up others.
+
+This post walks through a complete example illustrating an essential data science building block: the underfitting vs overfitting problem.
+- We’ll explore the problem and then implement a solution called cross-validation, another important principle of model development.
+
+[Python code](https://github.com/WillKoehrsen/Data-Analysis) for the graphs and results.
+
+**Model Basics**
+
+- What is a model? 
+  - A model is simply a system for mapping inputs to outputs.
+  - Models are useful because we can use them to predict the values of outputs for new data points given the inputs.
+  - A model represents a theory about a problem: there is some connection between inputs & outputs, and the price and we make a model to learn that relationship.
+
+- A model learns relationships between the inputs, called **features**, and outputs, called **labels**, from a training dataset.
+  - During training the model is given both the features and the labels and learns how to map the former to the latter.
+  - A trained model is evaluated on a testing set, where we only give it the features and it makes predictions.
+  - We compare the predictions with the known labels for the testing set to calculate accuracy.
+  - Models can take many shapes, from simple linear regressions to deep neural networks, but all supervised models are based on the fundamental idea of learning relationships between inputs and outputs from training data.
+
+**Training and Testing Data**
+
+- To make a model, we first need data that has an underlying relationship.
+- A trend in data can be called the true function
+  - During training, we want our model to learn the true function without being “distracted” by the noise.
+
+**Model Building**
+
+- Choosing a model can seem intimidating, but a good rule is to start simple and then build your way up.
+  - The simplest model is a linear regression, where the outputs are a linearly weighted combination of the inputs.
+    -  An extension of linear regression is called [polynomial regression](https://onlinecourses.science.psu.edu/stat501/node/324) to learn the relationship between x and y.
+	  - Polynomial regression, where the inputs are raised to different powers, is still considered a form of “linear” regression even though the graph does not form a straight line (this confused me at first as well!)
+	  
+	  ![Graphs of Polynomial Functions](../images/PolynomialsOfVaryingDegree.jpg)
+	  
+**Overfitting vs. Underfitting**
+
+- The best way to understand the issue is to take a look at models demonstrating both situations.
+  - First up is an underfit model with a 1 degree polynomial fit. In the image on the left, model function in orange is shown on top of the true function and the training observations. On the right, the model predictions for the testing data are shown compared to the true function and testing data points.
+    
+	![1 Degree Model on Training Data](../images/OneDegreeTraining.png) ![1 Degree Model on Testing Data](../images/OneDegreeTesting.png)
+    
+	- Our model passes straight through the training set with no regard for the data! This is because an underfit model has low variance and high bias.
+    - Variance refers to how much the model is dependent on the training data.
+	- High bias means it makes a strong assumption about the data.
+	
+  - A natural conclusion would be to learn the training data, we should just increase the degree of the model to capture every change in the data. This however is not the best decision!
+    
+	![25 Degree Model on Training Data](../images/TwentyFiveDegreesTraining) ![25 Degree Model on Testing Data](../images/TwentyFiveDegreesTesting)
+	
+	- With such a high degree of flexibility, the model does its best to account for every single training point.
+	- This is a model with a high variance, because it will change significantly depending on the training data.
+	- The predictions on the test set are better than the one degree model, but the twenty five degree model still does not learn the relationship because it essentially memorizes the training data and the noise.
+
+Our problem is that we want a model that does not “memorize” the training data, but learns the actual relationship! How can we find a balanced model with the right polynomial degree?
+  - Fortunately, there is a well-established data science technique for developing the optimal model: validation.
+  
+**Validation**
+
+We need to create a model with the best settings (the degree), but we don’t want to have to keep going through training and testing.
+  - We need some sort of pre-test to use for model optimization and evaluate. This pre-test is known as a validation set.
+
+The idea is straightforward: rather than using a separate validation set, we split the training set into a number of subsets, called folds.
+  - If we choose 5 folds:
+    - We perform a series of train and evaluate cycles where each time we train on 4 of the folds and test on the 5th, called the hold-out set. 
+	- We repeat this cycle 5 times, each time using a different fold for evaluation. 
+  - At the end, we average the scores for each of the folds to determine the overall performance of a given model.
+    - This allows us to optimize the model before deployment without having to use additional data.
+  - For our problem, we can use cross-validation to select the best model by creating models with a range of different degrees, and evaluate each one using 5-fold cross-validation.
+    - The model with the lowest cross-validation score will perform best on the testing data and will achieve a balance between underfitting and overfitting.
+    - To compare models, we compute the mean-squared error, the average distance between the prediction and the real value squared.
+
+To verify we have the optimal model, we can also plot what are known as training and testing curves.
+  - A model that is underfit will have high training and high testing error while an overfit model will have extremely low training error but a high testing error.
+  
+ As the flexibility in the model increases (by increasing the polynomial degree) the training error continually decreases due to increased flexibility. 
+   - However, the error on the testing set only decreases as we add flexibility up to a certain point.
+   - Cross-validation yielded the second best model on this testing data, but in the long run we expect our cross-validation model to perform best.
+     - The exact metrics depend on the testing set, but on average, the best model from cross-validation will outperform all other models.
+
+**Conclusions**
+
+- Overfitting and underfitting is a fundamental problem that trips up even experienced data analysts.
+- Fortunately, this is a mistake that we can easily avoid now that we have seen the importance of model evaluation and optimization using cross-validation.
+- Once we understand the basic problems in data science and how to address them, we can feel confident in building up more complex models and helping others avoid mistakes.
+- Data science is all about being willing to learn and continually adding more tools to your skillset. The field is exciting both for its potential beneficial impacts and for the opportunity to constantly learn new techniques.
+- Scikit-Learn [example](http://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html) on this topic.

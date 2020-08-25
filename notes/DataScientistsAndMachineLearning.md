@@ -239,7 +239,8 @@ This post walks through a complete example illustrating an essential data scienc
 	
   - A natural conclusion would be to learn the training data, we should just increase the degree of the model to capture every change in the data. This however is not the best decision!
     
-
+    |A|B|
+	|:----:|:----:|
 	|![25 Degree Model on Training Data](../images/TwentyFiveDegreesTraining.png) | ![25 Degree Model on Testing Data](../images/TwentyFiveDegreesTesting.png)|
 	
 	- With such a high degree of flexibility, the model does its best to account for every single training point.

@@ -231,7 +231,8 @@ This post walks through a complete example illustrating an essential data scienc
 - The best way to understand the issue is to take a look at models demonstrating both situations.
   - First up is an underfit model with a 1 degree polynomial fit. In the image on the left, model function in orange is shown on top of the true function and the training observations. On the right, the model predictions for the testing data are shown compared to the true function and testing data points.
     
-	![1 Degree Model on Training Data](../images/OneDegreeTraining.png) ![1 Degree Model on Testing Data](../images/OneDegreeTesting.png)
+	|![1 Degree Model on Training Data](../images/OneDegreeTraining.png)|![1 Degree Model on Testing Data](../images/OneDegreeTesting.png)|
+	|:-:|:-:|
     
 	- Our model passes straight through the training set with no regard for the data! This is because an underfit model has low variance and high bias.
     - Variance refers to how much the model is dependent on the training data.
